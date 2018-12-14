@@ -1,8 +1,5 @@
 %% Setup parallel pool.
-if isempty(gcp('nocreate'))
-    nCpus = feature('numCores');
-    parpool('local', nCpus);
-end
+setupparallelpool
 dq = parallel.pool.DataQueue;
 
 %% Setup progress bar.
