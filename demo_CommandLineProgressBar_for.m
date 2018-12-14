@@ -1,10 +1,10 @@
 %% Setup progress bar.
 N = 30;
-pb = CommandLineProgressBar(N);
+progressBar = CommandLineProgressBar(N);
 
 % Optional settings.
-pb.message = 'Status';
-pb.barLength = 42;
+progressBar.message = 'Status';
+progressBar.barLength = 42;
 
 %% Loop
 for idx = 1:N
@@ -12,6 +12,6 @@ for idx = 1:N
     pause(rand());
     
     % Update progressbar.
-    pb.increment;
+    progressBar.increment;
 end
 

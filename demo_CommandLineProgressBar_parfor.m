@@ -1,21 +1,21 @@
 %% Setup parallel pool.
 setupparallelpool
-dq = parallel.pool.DataQueue;
+dataQueue = parallel.pool.DataQueue;
 
 %% Setup progress bar.
 N = 30;
-pb = CommandLineProgressBar(N);
+progressBar = CommandLineProgressBar(N);
 
 % Optional settings.
-pb.message = 'Status';
-pb.barLength = 42;
+progressBar.message = 'Status';
+progressBar.barLength = 42;
 
 %% Loop
-afterEach(dq, @(varargin) increment(pb));
+afterEach(dataQueue, @(varargin) increment(progressBar));
 parfor idx = 1:N
     % Work
     pause(rand());
     
     % Update progressbar.
-    send(dq,idx);
+    send(dataQueue,idx);
 end
