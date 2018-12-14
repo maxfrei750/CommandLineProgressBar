@@ -11,6 +11,7 @@ classdef CommandLineProgressBar < handle
         nIncrements_total
         nIncrements_current = 0
         wasAlreadyPrinted = false
+        lastUpdate = -1
     end
     
     properties(Dependent=true)
@@ -35,7 +36,11 @@ classdef CommandLineProgressBar < handle
         function obj = increment(obj)
             %INCREMENT Increment the progressbar.
             obj.nIncrements_current = obj.nIncrements_current+1;
-            obj.print;
+            
+            if obj.progress_percent ~= obj.lastUpdate
+                obj.print;
+                obj.lastUpdate = obj.progress_percent;
+            end
         end
         
         function print(obj)
