@@ -15,6 +15,7 @@ classdef CommandLineProgressBar < handle
     
     properties(Dependent=true)
         progress
+        progress_percent
     end
     
     methods
@@ -63,7 +64,7 @@ classdef CommandLineProgressBar < handle
             end
             
             % Print the progressbar.
-            fprintf('%s%3d%%',barString,round(obj.progress*100));
+            fprintf('%s%3d%%',barString,obj.progress_percent);
             
             % On the last increment print a linebreak.
             if obj.progress == 1
@@ -74,6 +75,10 @@ classdef CommandLineProgressBar < handle
         %% Getters
         function value = get.progress(obj)
             value = obj.nIncrements_current/obj.nIncrements_total;
+        end
+        
+        function value = get.progress_percent(obj)
+            value = floor(obj.progress*100);
         end
         
         %% Setters
