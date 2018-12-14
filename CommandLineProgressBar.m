@@ -58,7 +58,7 @@ classdef CommandLineProgressBar < handle
             if obj.wasAlreadyPrinted
                 fprintf(repmat('\b',1,numel(barString)+4));
             else
-                fprintf('%s: ',obj.message)
+                fprintf('%s',obj.message)
                 obj.wasAlreadyPrinted = true;
             end
             
