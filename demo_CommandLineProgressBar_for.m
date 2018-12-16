@@ -3,7 +3,7 @@ N = 30;
 progressBar = CommandLineProgressBar(N);
 
 % Optional settings.
-progressBar.message = 'Status';
+progressBar.message = 'Status: ';
 progressBar.barLength = 42;
 
 %% Loop
