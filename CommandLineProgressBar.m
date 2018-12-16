@@ -12,6 +12,7 @@ classdef CommandLineProgressBar < handle
         nIncrements_current = 0
         wasAlreadyPrinted = false
         lastUpdate = -1
+        dataQueue
     end
     
     properties(Dependent=true)
@@ -31,10 +32,24 @@ classdef CommandLineProgressBar < handle
             
             % Assign property.
             obj.nIncrements_total = nIncrements_total;
+            
+            % Setup parallel pool.
+            setupparallelpool
+            
+            % Create a dataqueue.
+            obj.dataQueue = parallel.pool.DataQueue;
+            
+            % Set an after each event for the datacue.
+            afterEach(obj.dataQueue, @(varargin) obj.update);
         end
         
-        function obj = increment(obj)
-            %INCREMENT Increment the progressbar.
+        function increment(obj)
+            % INCREMENT Trigger an update of the progressbar.
+            send(obj.dataQueue,1);
+        end
+        
+        function obj = update(obj)
+            %UPDATE Update the progressbar.
             obj.nIncrements_current = obj.nIncrements_current+1;
             
             if obj.progress_percent ~= obj.lastUpdate
